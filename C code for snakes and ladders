@@ -1,0 +1,66 @@
+#include<iostream>
+#include <queue>
+using namespace std;
+
+struct Entryline
+{
+	int v;	 
+	int dist; 
+};
+
+
+int getMinDiceThrows(int move[], int N)
+{
+	
+	bool *visited = new bool[N];
+	for (int i = 0; i < N; i++)
+		visited[i] = false;
+
+	queue<Entryline> x;
+
+	visited[0] = true;
+	Entryline s = {0, 0}; 
+	x.push(s);
+
+	Entryline qe;
+	while (!x.empty())
+	{
+		el = x.front();
+		int v = el.v; 
+		if (v == N-1)
+			break;
+      x.pop();
+		for (int j=v+1; j<=(v+6) && j<N; ++j)
+		{	if (!visited[j])
+			{Entryline a;
+				a.dist = (el.dist + 1);
+				visited[j] = true;
+        if (move[j] != -1)
+					a.v = move[j];
+				else
+					a.v = j;
+				x.push(a);
+			}
+		}
+	}
+return el.dist;
+}
+int main()
+{
+	int N = 30;
+	int moves[N];
+	for (int i = 0; i<N; i++)
+		moves[i] = -1;
+
+	moves[2] = 21;
+	moves[4] = 7;
+	moves[10] = 25;
+	moves[19] = 28;
+	moves[26] = 0;
+	moves[20] = 8;
+	moves[16] = 3;
+	moves[18] = 6;
+
+	cout << "Minimum dice throws needed to go is " << getMinDiceThrows(moves, N);
+	return 0;
+}
